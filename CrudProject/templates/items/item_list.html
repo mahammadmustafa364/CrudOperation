@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        main {
+            margin: 2em auto;
+            max-width: 800px;
+            background-color: white;
+            padding: 2em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin: 0.5em 0;
+            padding: 1em;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin-right: 1em;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .add-item {
+            display: inline-block;
+            margin-bottom: 1em;
+            color: white;
+            background-color: #4CAF50;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .add-item:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CRUD Application</h1>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+        <h1>Item List</h1>
+        <a class="add-item" href="{% url 'items:item_create' %}">Add New Item</a>
+        <ul>
+            {% for item in items %}
+            <li>
+                <a href="{% url 'items:item_detail' item.id %}">{{ item.name }}</a>
+                <a href="{% url 'items:item_update' item.id %}">Edit</a>
+                <a href="{% url 'items:item_delete' item.id %}">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
